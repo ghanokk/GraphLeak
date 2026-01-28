@@ -24,15 +24,15 @@ GraphLeak automates this process:
 
 ## Features
 
+-   **Clean, Colored Output:** Only shows discovered fields in the console for a focused experience. Uses colors for easy reading.
 -   **File-based Input:** Use external files for your GraphQL query and wordlist.
 -   **Clean Output:** Saves all discovered fields to a specified output file, with duplicates automatically removed.
 -   **SSL Support:** Handles endpoints with SSL/TLS, with an option to disable verification for testing (`--insecure`).
 -   **Debug Mode:** A `--debug` flag to view the exact queries being sent and the full server responses, making troubleshooting easy.
--   **Flexible:** Easily adaptable to fuzz different parts of a query.
 
 ## Installation
 
-GraphLeak requires Python 3 and the `requests` library.
+GraphLeak requires Python 3 and the `requests` and `colorama` libraries.
 
 1.  Clone the repository:
     ```bash
@@ -40,9 +40,9 @@ GraphLeak requires Python 3 and the `requests` library.
     cd graphleak
     ```
 
-2.  Install the required package:
+2.  Install the required packages:
     ```bash
-    pip install requests
+    pip install requests colorama
     ```
 
 ## Usage
@@ -84,36 +84,30 @@ python graphleak.py \
   --output "found_fields.txt"
 ```
 
-**Command with SSL Bypass and Debug Mode:**
-Use this if you encounter SSL errors or want to see verbose output.
+**Example Output:**
+```
+[*] GraphLeak Starting...
+    Target: https://target.com/graphql
+    Wordlist: wordlist.txt
+    Output: found_fields.txt
+--------------------------------------------------
+[+] Found Field: validateFile
+[+] Found Field: internalData
+[+] Found Field: userProfile
+--------------------------------------------------
+[+] Scan Complete. Found 3 unique fields.
+[*] Results saved to: found_fields.txt
+```
+
+**Command with Debug Mode:**
+Use this if you encounter issues or want to see verbose output.
 ```bash
 python graphleak.py \
   --endpoint "https://target.com/graphql" \
   --query "query.txt" \
   --wordlist "wordlist.txt" \
   --output "found_fields.txt" \
-  --insecure \
   --debug
-```
-
-### 3. Check the Results
-
-The tool will print its progress to the console. All unique fields found will be saved to the output file you specified.
-
-**Console Output:**
-```
-[*] Target Endpoint: https://target.com/graphql
-[*] Reading query from: query.txt
-...
-[*] Testing field: 'validationError'...    [+] FOUND suggestion: 'validateFile'
-...
-[+] Enumeration complete. Found 1 unique valid fields.
-[*] Successfully saved suggestions to 'found_fields.txt'
-```
-
-**`found_fields.txt`:**
-```
-validateFile
 ```
 
 ## Options
@@ -136,9 +130,4 @@ This tool is for authorized security testing and educational purposes only. Do n
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 ```
 
-**To complete your repo, you should also:**
-1.  Create a `LICENSE` file and paste the MIT license text into it.
-2.  Rename the Python script to `graphleak.py` to match the README.
-3.  Replace `your-username` in the clone URL with your actual GitHub username.
-
-Good luck with your repo
+Now your tool has a much more professional and user-friendly feel
