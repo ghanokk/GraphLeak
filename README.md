@@ -128,6 +128,5 @@ This tool is for authorized security testing and educational purposes only. Do n
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-```
 
 
